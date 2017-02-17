@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id: StringsLiterallyEqual.testxng 52 2010-04-02 21:01:18Z filipvanlaenen $ -->
+<Tests>
+
+  <Test id="LiterallyEqualStrings">
+    <Source><Foo><Bar>Lorem ipsum</Bar></Foo></Source>
+    <Assert>
+      <Transforms>
+        <ExpectedResult><Foo Bar="Lorem ipsum">Qux</Foo></ExpectedResult>
+        <Transformation>FooBar.xslt</Transformation>
+      </Transforms>
+    </Assert>    
+  </Test>
+
+  <Test id="WhitespaceBreaksEquivalence">
+    <Source><Foo><Bar>Lorem ipsum</Bar></Foo></Source>
+    <Assert>
+      <Transforms>
+        <ExpectedResult>
+          <Foo Bar="Lorem ipsum">
+            Qux
+          </Foo>
+        </ExpectedResult>
+        <Transformation>FooBar.xslt</Transformation>
+      </Transforms>
+    </Assert>    
+  </Test>
+
+</Tests>

@@ -1,0 +1,54 @@
+<Tests>
+
+  <Test id="TransformsCanHaveExpectedResultWithXmlCode">
+    <Source><Foo><Bar>Lorem ipsum</Bar></Foo></Source>
+    <Assert>
+      <Transforms>
+        <ExpectedResult><Foo>A Bar with Lorem ipsum</Foo></ExpectedResult>
+        <Transformation>FooBar.xslt</Transformation>
+      </Transforms>
+    </Assert>    
+  </Test>
+
+  <Test id="TransformsCanHaveAMode">
+    <Source><Foo><Bar>Lorem ipsum</Bar></Foo></Source>
+    <Assert>
+      <Transforms>
+        <Mode>qux</Mode>
+        <ExpectedResult><Foo>A Bar with Lorem ipsum in qux</Foo></ExpectedResult>
+        <Transformation>FooBar.xslt</Transformation>
+      </Transforms>
+    </Assert>    
+  </Test>
+  
+  <Test id="ResultElementsCanHaveAttributes">
+    <Source><FooWithAttribute><Bar>Lorem ipsum</Bar></FooWithAttribute></Source>
+    <Assert>
+      <Transforms>
+        <ExpectedResult><Foo Bar="Lorem ipsum">A Bar as an attribute</Foo></ExpectedResult>
+        <Transformation>FooBar.xslt</Transformation>
+      </Transforms>
+    </Assert>    
+  </Test>
+
+  <Test id="TransformsCanHaveExpectedResultFilename">
+    <Source><Foo><Bar>Lorem ipsum</Bar></Foo></Source>
+    <Assert>
+      <Transforms>
+        <ExpectedResultFile>FooBarTransformed.xml</ExpectedResultFile>
+        <Transformation>FooBar.xslt</Transformation>
+      </Transforms>
+    </Assert>    
+  </Test>
+
+  <Test id="TransformsAtTheRootCanBeDifferent">
+    <Source><Foo><Bar>Lorem ipsum</Bar></Foo></Source>
+    <Assert>
+      <Transforms>
+        <AsRootElement/>
+        <ExpectedResult><Foo>A Bar with Lorem ipsum at the root</Foo></ExpectedResult>
+        <Transformation>FooBar.xslt</Transformation>
+      </Transforms>
+    </Assert>    
+  </Test>
+</Tests>

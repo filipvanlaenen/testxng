@@ -1,0 +1,103 @@
+<Tests>
+
+  <Test id="ValidatesCanBeEmpty">
+    <Source>
+      <Validates/>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+
+  <Test id="DoesNotValidateCanBeEmpty">
+    <Source>
+      <DoesNotValidate/>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+
+  <Test id="ValidatesCanHaveSchemaWithFilename">
+    <Source>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+
+  <Test id="DoesNotValidateCanHaveSchemaWithFilename">
+    <Source>
+      <DoesNotValidate>
+        <Schema>TestXNG.xsd</Schema>
+      </DoesNotValidate>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+
+  <Test id="AssertCanHaveOneValidates">
+    <Source>
+      <Assert>
+        <Validates>
+          <Schema>TestXNG.xsd</Schema>
+        </Validates>
+      </Assert>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+
+  <Test id="AssertCanHaveOneDoesNotValidate">
+    <Source>
+      <Assert>
+        <DoesNotValidate>
+          <Schema>TestXNG.xsd</Schema>
+        </DoesNotValidate>
+      </Assert>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+
+  <Test id="SchemaCanHaveXsdFilename">
+    <Source>
+      <Schema>FooBar.xsd</Schema>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>  
+
+  <Test id="SchemaCannotHaveOtherExtension">
+    <Source>
+      <Schema>FooBar.other</Schema>
+    </Source>
+    <Assert>
+      <DoesNotValidate>
+        <Schema>TestXNG.xsd</Schema>
+      </DoesNotValidate>
+    </Assert>
+  </Test>  
+  
+</Tests>

@@ -1,0 +1,70 @@
+% Installation
+%
+% Author: Filip van Laenen <f.a.vanlaenen@ieee.org>
+% Version: $Id: chpt_installation.tex 40 2010-01-23 20:27:41Z filipvanlaenen $
+
+\chapter{Installation}
+
+\section{Maven Plug-In}
+
+\subsection{Deployment from a Binary Distribution}
+
+\subsection{Compilation and Deployment from Source Code}
+
+The source code for TestXNG can be checked out through Subversion\seeurl{http://subversion.tigris.org} with the following instruction set:
+\begin{verbatim}
+svn co https://testxng.svn.sourceforge.net/svnroot/testxng testxng
+\end{verbatim}
+Once the source has been checked out, simply build the project using the following command, and TestXNG's core and plug-in will be deployed to your local repository:
+\begin{verbatim}
+mvn clean install
+\end{verbatim}
+
+\subsection{Configuration of the Maven Plug-In}
+
+The POM file in the module {\tt selftest} contains an example of how to use and configure the plug-in, but here's a summary of what needs to be done to use it:
+
+First of all, a dependency to the plug-in has to be declared, e.g. like this:
+\begin{verbatim}
+  <dependencies>
+  ...
+    <dependency>
+      <groupId>net.sourceforge.testxng</groupId>
+      <artifactId>maven-testxng-plugin</artifactId>
+      <version>0.8</version>
+    </dependency>
+  ...
+  </dependencies>
+\end{verbatim}
+Be sure to fill in the correct version number. Next, add the {\tt test} goal of the plugin to Maven's {\tt test} phase like in the following example:
+\begin{verbatim}
+  <build>
+    ...
+    <plugins>
+      ...
+      <plugin>
+        <groupId>net.sourceforge.testxng</groupId>
+        <artifactId>maven-testxng-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+    ...
+  </build>
+\end{verbatim}
+Finally, unless configured otherwise, the plug-in will look for files with a {\tt .testxng} extension in the {\tt src/test/testxng} directory, so that's where the TestXNG test definition files should be put. The log will be written to the {\tt target} directory, to a file called {\tt testxng.log}.
+
+\section{Stand-Alone Java Application}
+
+\subsection{Deployment from a Binary Distribution}
+
+\subsection{Compilation and Deployment from Source Code}
+
+\subsection{Configuration of the Stand-Alone Java Application}

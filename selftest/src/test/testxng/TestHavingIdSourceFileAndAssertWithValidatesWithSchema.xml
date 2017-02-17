@@ -1,0 +1,8 @@
+<Test id="fooBarBaz">
+  <SourceFile>FooBar.xml</SourceFile>
+  <Assert>
+    <Validates>
+      <Schema>FooBarBaz.xsd</Schema>
+    </Validates>
+  </Assert>
+</Test>

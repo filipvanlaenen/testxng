@@ -1,0 +1,41 @@
+<!-- $Id: pom.xml 97 2014-03-09 19:58:26Z filipvanlaenen $ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sourceforge.testxng</groupId>
+    <artifactId>root</artifactId>
+    <version>0.7.99.3-SNAPSHOT</version>
+  </parent>
+  <groupId>net.sourceforge.testxng</groupId>
+  <artifactId>command-line</artifactId>
+  <packaging>jar</packaging>
+  <name>TestXNG Command-Line Interface</name>
+  <description>
+    Command-line interface for TestXNG
+  </description>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>appassembler-maven-plugin</artifactId>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>appassembler-maven-plugin</artifactId>
+        <configuration>
+          <assembleDirectory>${project.build.directory}/testxng</assembleDirectory>
+          <programs>
+            <program>
+              <mainClass>net.sourceforge.testxng.commandline.CommandLineInterface</mainClass>
+              <name>testxng</name>
+            </program>
+          </programs>
+        </configuration>      
+      </plugin>
+    </plugins>
+  </build>
+</project>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: local-jalopy.xml 51 2010-04-02 20:49:07Z filipvanlaenen $ -->
+<jalopy>
+  <general>
+    <compliance>
+      <version>15</version>
+    </compliance>
+    <style>
+      <description>Sun Java Coding Convention</description>
+      <name>Sun</name>
+    </style>
+  </general>
+</jalopy>
+
+
+

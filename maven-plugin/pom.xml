@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sourceforge.testxng</groupId>
+    <artifactId>root</artifactId>
+    <version>0.7.99.3-SNAPSHOT</version>
+  </parent>
+  <groupId>net.sourceforge.testxng</groupId>
+  <artifactId>maven-testxng-plugin</artifactId>
+  <packaging>maven-plugin</packaging>
+  <name>TestXNG Plugin for Maven</name>
+  <description>
+    Maven-plugin for TestXNG
+  </description>
+  <dependencies>
+    <dependency>
+      <groupId>${pom.groupId}</groupId>
+      <artifactId>core</artifactId>
+      <version>${pom.version}</version>
+    </dependency>
+  </dependencies>
+</project>

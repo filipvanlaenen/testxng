@@ -1,0 +1,121 @@
+% Chapter about testing XSL transformations
+%
+% Author: Filip van Laenen <f.a.vanlaenen@ieee.org>
+% Version: $Id: chpt_xsl_transformations.tex 43 2010-01-24 11:46:55Z filipvanlaenen $
+
+\chapter{Testing XSL Transformations}
+
+\section{Basic Verification of XSL Transformations}
+
+The following example shows how an XSL transformation can be tested in TestXNG. Both the XML source code and the expected result are included in the test definition, together with a reference to the XSL transformation file that should be used:
+\begin{verbatim}
+<Tests>
+  ...
+  <Test id="BasicTestOfAnXslTransformationWithSourceAndExpectedResult">
+    <Source><Foo><Bar>Lorem ipsum</Bar></Foo></Source>
+    <Assert>
+      <Transforms>
+        <ExpectedResult><Foo>A Bar with Lorem ipsum</Foo></ExpectedResult>
+        <Transformation>FooBar.xslt</Transformation>
+      </Transforms>
+    </Assert>    
+  </Test>
+  ...
+</Tests>
+\end{verbatim}
+
+Of course, juse like for XML schemas, the source can come from an external file using a {\tt SourceFile} element in the TestXNG definition, and in the same way the expected result can be stored in an external file too and referenced to using a {\tt ExpectedResultFile} element instead. The following example shows how this can be done:
+\begin{verbatim}
+<Tests>
+  ...
+  <Test id="BasicTestOfAnXslTransformationWithExternalSourceAndExpectedResult">
+    <SourceFile>FooBar.xml</SourceFile>
+    <Assert>
+      <Transforms>
+        <ExpectedResultFile>FooBarTransformed.xml</ExpectedResultFile>
+        <Transformation>FooBar.xslt</Transformation>
+      </Transforms>
+    </Assert>    
+  </Test>
+  ...
+</Tests>
+\end{verbatim}
+
+Since there is no connection between the {\tt Source} and the {\tt SourceFile} element on the one side, and the {\tt ExpectedResult} and {\tt ExpectedResultFile} elements on the other side, it is possible to store only the source or only the expected result of a test in an external file. The following two examples illustrate this:
+\begin{verbatim}
+<Tests>
+  ...
+  <Test id="BasicTestOfAnXslTransformationWithExternalExpectedResultOnly">
+    <Source><Foo><Bar>Lorem ipsum</Bar></Foo></Source>
+    <Assert>
+      <Transforms>
+        <ExpectedResultFile>FooBarTransformed.xml</ExpectedResultFile>
+        <Transformation>FooBar.xslt</Transformation>
+      </Transforms>
+    </Assert>    
+  </Test>
+  ...
+  <Test id="BasicTestOfAnXslTransformationWithExternalSourceOnly">
+    <SourceFile>FooBar.xml</SourceFile>
+    <Assert>
+      <Transforms>
+        <ExpectedResult><Foo>A Bar with Lorem ipsum</Foo></ExpectedResult>
+        <Transformation>FooBar.xslt</Transformation>
+      </Transforms>
+    </Assert>    
+  </Test>
+  ...
+</Tests>
+\end{verbatim}
+
+\section{Root Elements}
+
+By default, the source elements are assumed not to be the root element of the document. The source element will therefore be wrapped inside an extra root before transformation. It is, however, possible to specify that the source should be treated as the root element of a document, by adding the {\tt AsRootElement} marker element to the {\tt Transforms} element, as shown in the example below. In that case, the source will not be wrapped in an extra root element, and will therefore not only match templates matching {\tt /Foo}.
+\begin{verbatim}
+<Tests>
+  ...
+  <Test id="BasicTestOfAnXslTransformationWithSourceAndExpectedResult">
+    <Source><Foo><Bar>Lorem ipsum</Bar></Foo></Source>
+    <Assert>
+      <Transforms>
+        <AsRootElement/>
+        <ExpectedResult><Foo>A Bar with Lorem ipsum</Foo></ExpectedResult>
+        <Transformation>FooBar.xslt</Transformation>
+      </Transforms>
+    </Assert>    
+  </Test>
+  ...
+</Tests>
+\end{verbatim}
+
+\section{Modes}
+
+By default, no mode is used when the top node of the source is transformed. If a mode is required, it can be specified as a {\tt Mode} element inside the {\tt Transforms} element. The following example shows how this can be done:
+\begin{verbatim}
+<Tests>
+  ...
+  <Test id="BasicTestOfAnXslTransformationWithSourceAndExpectedResult">
+    <Source><Foo><Bar>Lorem ipsum</Bar></Foo></Source>
+    <Assert>
+      <Transforms>
+        <Mode>Qux</Mode>
+        <ExpectedResult><Foo>A Bar with Lorem ipsum</Foo></ExpectedResult>
+        <Transformation>FooBar.xslt</Transformation>
+      </Transforms>
+    </Assert>    
+  </Test>
+  ...
+</Tests>
+\end{verbatim}
+
+It is not allowed to mark a source element to be a root element and specify a mode for it at the same time.
+
+\section{Parameters and Variables}
+
+\section{Direct Calls to Templates}
+
+\section{Keys}
+
+\section{Output Types}
+
+\section{Organizing XSL Transformations for Testability}

@@ -1,0 +1,93 @@
+<Tests>
+
+  <Test id="AssertCannotHaveBothValidateAndDoesNotValidate">
+    <Source>
+      <Assert>
+        <Validates>
+          <Schema>TestXNG.xsd</Schema>
+        </Validates>
+        <DoesNotValidate>
+          <Schema>TestXNG.xsd</Schema>
+        </DoesNotValidate>
+      </Assert>
+    </Source>
+    <Assert>
+      <DoesNotValidate>
+        <Schema>TestXNG.xsd</Schema>
+      </DoesNotValidate>
+    </Assert>
+  </Test>
+
+  <Test id="SourceFileCanHaveFilename">
+    <Source>
+      <SourceFile>FooBar.xml</SourceFile>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+
+  <Test id="SourceCanHaveAnyXmlCode">
+    <Source>
+      <Source>
+        <Foo>
+          <Bar>Lorem ipsum</Bar>
+          <Baz/>
+        </Foo>
+      </Source>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+  
+  <Test id="TestCanHaveIdSourceAndAssertWithValidatesWithSchema">
+    <SourceFile>TestHavingIdSourceAndAssertWithValidatesWithSchema.xml</SourceFile>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+
+  <Test id="TestCanHaveIdSourceFileAndAssertWithValidatesWithSchema">
+    <SourceFile>TestHavingIdSourceFileAndAssertWithValidatesWithSchema.xml</SourceFile>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+  
+  <Test id="TestCannotHaveSourceAndSourceFile">
+    <SourceFile>TestHavingIdSourceSourceFileAndAssertWithValidatesWithSchema.xml</SourceFile>
+    <Assert>
+      <DoesNotValidate>
+        <Schema>TestXNG.xsd</Schema>
+      </DoesNotValidate>
+    </Assert>
+  </Test>
+
+  <Test id="TestMustHaveId">
+    <SourceFile>TestHavingSourceFileAndAssertWithValidatesWithSchema.xml</SourceFile>
+    <Assert>
+      <DoesNotValidate>
+        <Schema>TestXNG.xsd</Schema>
+      </DoesNotValidate>
+    </Assert>
+  </Test>
+
+  <Test id="TestsCanHave2Tests">
+    <SourceFile>TestsWith2Tests.xml</SourceFile>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+  
+</Tests>

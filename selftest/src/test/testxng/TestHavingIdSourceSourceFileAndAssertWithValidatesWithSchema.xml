@@ -1,0 +1,14 @@
+<Test id="fooBarBaz">
+  <Source>
+    <Foo>
+      <Bar>Lorem ipsum</Bar>
+      <Baz/>
+    </Foo>
+  </Source>
+  <SourceFile>FooBar.xml</SourceFile>
+  <Assert>
+    <Validates>
+      <Schema>FooBarBaz.xsd</Schema>
+    </Validates>
+  </Assert>
+</Test>

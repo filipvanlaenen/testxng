@@ -1,0 +1,31 @@
+% Chapter about the basic functionality in TestXNG
+%
+% Author: Filip van Laenen <f.a.vanlaenen@ieee.org>
+% Version: $Id: chpt_basic_functionality.tex 10 2009-01-07 20:52:04Z filipvanlaenen $
+
+\chapter{Basic Functionality}
+
+TestXNG tests are specified in XML documents, and each such XML document can contain more than one test. In general, tests have to have at least an identifier, a piece of XML source code to start the test from, and one or more assertions about the XML source code. Assertions include whether or not the XML source code validates against its XML Schema and what the result of an XSL Transformation operating on the source code should be like. The following example illustrates this:
+\begin{verbatim}
+<Tests>
+  <Test id="FooBarValidates">
+    <Source>
+      <Foo>
+        <Bar>Lorem ipsum</Bar>
+      </Foo>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>FooBar.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+</Tests>
+\end{verbatim}
+In this case, the test definition file contains only a single test with the identifier {\tt FooBarValidates}. The test's source code contains a parent XML element {\tt Foo} having a child XML element {\tt Bar} containing the text {\tt Lorem ipsum}, all included in the test's {\tt Source} element. The {\tt Assert} element contains a {\tt Validates} element, which means that TestXNG should try to validate the source code against the XML schema {\tt FooBar.xsd}.
+
+If the source code validates against this schema, the test will result in a success. If the source code doesn't validate, the result will be a failure. If something unexpectedly goes wrong, e.g. because the referenced XML schema doesn't contain a valid XML schema definition, the test will result in an error.
+
+Instead of always including the XML source code in the test definition, it can be stored in a separate XML source file, and tests can refer to the fie with the file name. This makes it possible to reuse the same XML source code across many tests, even in different test definition files, in addition to that it can make the tests more readable when the source code parts become larger. In the same way, the expected result for an XSL transformation can be included directly in the test definition file, or stored in a separate XML file and referred to using the file name.
+
+The next chapters will explain in more detail the functionality of TestXNG, including the types of assertions that can be included in a test, and suggestions for how tests, XML schemas and XSL transformations can be organized together in order to cover as much of the functionality as possible in the tests.

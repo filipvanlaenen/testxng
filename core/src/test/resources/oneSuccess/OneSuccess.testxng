@@ -1,0 +1,8 @@
+<Tests>
+  <Test id="OneSuccess">
+    <SourceFile>OneSuccess-source.xml</SourceFile>
+    <Assert>
+      <Validates/>
+    </Assert>
+  </Test>
+</Tests>

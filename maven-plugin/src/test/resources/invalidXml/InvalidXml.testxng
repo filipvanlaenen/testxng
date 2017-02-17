@@ -1,0 +1,3 @@
+<Tests>
+  <Foo>This does not validate against TestXNG.xsd</Foo>
+</Tests>

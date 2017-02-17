@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- $Id: TestXNG.xsd 42 2010-01-24 11:34:58Z filipvanlaenen $ -->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:element name="AsRootElement" type="AsRootElementType"/>
+
+  <xsd:element name="Assert" type="AssertType"/>
+
+  <xsd:element name="DoesNotValidate" type="DoesNotValidateType"/>
+
+  <xsd:element name="ExpectedResult" type="AnyXmlType"/>
+
+  <xsd:element name="ExpectedResultFile" type="xsd:string"/>
+
+  <xsd:element name="Mode" type="xsd:string"/>
+
+  <xsd:element name="Schema" type="SchemaType"/>
+
+  <xsd:element name="Source" type="AnyXmlType"/>
+
+  <xsd:element name="SourceFile" type="xsd:string"/>
+
+  <xsd:element name="Tests" type="TestsType"/>
+  
+  <xsd:element name="Test" type="TestType"/>
+
+  <xsd:element name="Transformation" type="TransformationType"/>
+
+  <xsd:element name="Transforms" type="TransformsType"/>
+
+  <xsd:element name="Validates" type="ValidatesType"/>
+  
+  <xsd:complexType name="AnyXmlType">
+    <xsd:choice>
+      <xsd:any processContents="skip"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="AsRootElementType"/>
+  
+  <xsd:complexType name="AssertType">
+    <xsd:choice>
+      <xsd:element ref="DoesNotValidate"/>
+      <xsd:element ref="Transforms"/>
+      <xsd:element ref="Validates"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="DoesNotValidateType">
+    <xsd:sequence>
+      <xsd:element name="Schema" type="SchemaType" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:simpleType name="SchemaType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value=".*\.xsd"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="TestsType">
+    <xsd:sequence>
+      <xsd:element ref="Test" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="TestType">
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element ref="Source"/>
+        <xsd:element ref="SourceFile"/>
+      </xsd:choice>
+      <xsd:element ref="Assert"/>
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:ID" use="required"/>
+  </xsd:complexType>
+
+  <xsd:simpleType name="TransformationType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value=".*\.xslt?"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="TransformsType">
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element ref="AsRootElement" minOccurs="0"/>
+        <xsd:element ref="Mode" minOccurs="0"/>
+      </xsd:choice>
+      <xsd:choice>
+        <xsd:element ref="ExpectedResult"/>
+        <xsd:element ref="ExpectedResultFile"/>
+      </xsd:choice>
+      <xsd:element name="Transformation" type="TransformationType"/>  
+    </xsd:sequence>
+  </xsd:complexType>
+ 
+  <xsd:complexType name="ValidatesType">
+    <xsd:sequence>
+      <xsd:element name="Schema" type="SchemaType" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+</xsd:schema>

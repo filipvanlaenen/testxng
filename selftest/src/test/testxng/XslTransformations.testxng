@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- $Id: XslTransformations.testxng 53 2010-04-02 21:32:31Z filipvanlaenen $ -->
+<Tests>
+
+  <Test id="ExpectedResultCanHaveAnyXmlCode">
+    <Source>
+      <ExpectedResult>
+        <Foo>
+          <Bar>Lorem ipsum</Bar>
+          <Baz/>
+        </Foo>
+      </ExpectedResult>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+  
+  <Test id="ExpectedResultFileCanHaveFilename">
+    <Source>
+      <ExpectedResultFile>FooBar.xml</ExpectedResultFile>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>  
+  
+  <Test id="TransformationCanHaveXslFilename">
+    <Source>
+      <Transformation>FooBar.xsl</Transformation>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>  
+  
+  <Test id="TransformationCanHaveXsltFilename">
+    <Source>
+      <Transformation>FooBar.xslt</Transformation>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>  
+
+  <Test id="TransformationCannotHaveOtherExtension">
+    <Source>
+      <Transformation>FooBar.other</Transformation>
+    </Source>
+    <Assert>
+      <DoesNotValidate>
+        <Schema>TestXNG.xsd</Schema>
+      </DoesNotValidate>
+    </Assert>
+  </Test>  
+  
+  <Test id="TransformsCanHaveExpectedResultAndTransformation">
+    <Source>
+      <Transforms>
+        <ExpectedResult><Foo><Bar>Lorem ipsum</Bar></Foo></ExpectedResult>
+        <Transformation>FooBar.xsl</Transformation>
+      </Transforms>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+  
+  <Test id="TransformsCanHaveExpectedResultFileAndTransformation">
+    <Source>
+      <Transforms>
+        <ExpectedResultFile>FooBar.xml</ExpectedResultFile>
+        <Transformation>FooBar.xsl</Transformation>
+      </Transforms>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+
+  <Test id="TransformsCanHaveModeExpectedResultAndTransformation">
+    <Source>
+      <Transforms>
+        <Mode>qux</Mode>
+        <ExpectedResult><Foo><Bar>Lorem ipsum</Bar></Foo></ExpectedResult>
+        <Transformation>FooBar.xsl</Transformation>
+      </Transforms>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+  
+  <Test id="TransformsCanHaveModeExpectedResultFileAndTransformation">
+    <Source>
+      <Transforms>
+        <Mode>qux</Mode>
+        <ExpectedResultFile>FooBar.xml</ExpectedResultFile>
+        <Transformation>FooBar.xsl</Transformation>
+      </Transforms>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+
+  <Test id="TransformsCanHaveAsRootElementExpectedResultAndTransformation">
+    <Source>
+      <Transforms>
+        <AsRootElement/>
+        <ExpectedResult><Foo><Bar>Lorem ipsum</Bar></Foo></ExpectedResult>
+        <Transformation>FooBar.xsl</Transformation>
+      </Transforms>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+  
+  <Test id="TransformsCanHaveAsRootElementExpectedResultFileAndTransformation">
+    <Source>
+      <Transforms>
+        <AsRootElement/>
+        <ExpectedResultFile>FooBar.xml</ExpectedResultFile>
+        <Transformation>FooBar.xsl</Transformation>
+      </Transforms>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+
+  <Test id="TransformsCannotHaveModeAndAsRootElementWithExpectedResultAndTransformation">
+    <Source>
+      <Transforms>
+        <AsRootElement/>
+        <Mode>qux</Mode>
+        <ExpectedResult><Foo><Bar>Lorem ipsum</Bar></Foo></ExpectedResult>
+        <Transformation>FooBar.xsl</Transformation>
+      </Transforms>
+    </Source>
+    <Assert>
+      <DoesNotValidate>
+        <Schema>TestXNG.xsd</Schema>
+      </DoesNotValidate>
+    </Assert>
+  </Test>
+  
+  <Test id="TransformsCannotHaveModeAndAsRootElementWithExpectedResultFileAndTransformation">
+    <Source>
+      <Transforms>
+        <AsRootElement/>
+        <Mode>qux</Mode>
+        <ExpectedResultFile>FooBar.xml</ExpectedResultFile>
+        <Transformation>FooBar.xsl</Transformation>
+      </Transforms>
+    </Source>
+    <Assert>
+      <DoesNotValidate>
+        <Schema>TestXNG.xsd</Schema>
+      </DoesNotValidate>
+    </Assert>
+  </Test>
+
+  <Test id="AsRootElementMustBeEmpty">
+    <Source>
+      <AsRootElement>*</AsRootElement>
+    </Source>
+    <Assert>
+      <DoesNotValidate>
+        <Schema>TestXNG.xsd</Schema>
+      </DoesNotValidate>
+    </Assert>
+  </Test>
+
+  <Test id="TransformsCannotHaveExpectedResultAndExpectedResultFile">
+    <Source>
+      <Transforms>
+        <ExpectedResult><Foo><Bar>Lorem ipsum</Bar></Foo></ExpectedResult>
+        <ExpectedResultFile>FooBar.xml</ExpectedResultFile>
+        <Transformation>FooBar.xsd</Transformation>
+      </Transforms>
+    </Source>
+    <Assert>
+      <DoesNotValidate>
+        <Schema>TestXNG.xsd</Schema>
+      </DoesNotValidate>
+    </Assert>
+  </Test>
+  
+  <Test id="AssertCanHaveOneTransforms">
+    <Source>
+      <Assert>
+        <Transforms>
+          <ExpectedResultFile>FooBar.xml</ExpectedResultFile>
+          <Transformation>FooBar.xsl</Transformation>
+        </Transforms>
+      </Assert>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>  
+
+  <Test id="StringsLiterallyEqualMustBeEmpty">
+    <Source>
+      <StringsLiterallyEqual>*</StringsLiterallyEqual>
+    </Source>
+    <Assert>
+      <DoesNotValidate>
+        <Schema>TestXNG.xsd</Schema>
+      </DoesNotValidate>
+    </Assert>
+  </Test>
+
+  <Test id="TransformsCanHaveExpectedResultTransformationAndStringsLiterallyEqual">
+    <Source>
+      <Transforms>
+        <ExpectedResult><Foo><Bar>Lorem ipsum</Bar></Foo></ExpectedResult>
+        <Transformation>FooBar.xsl</Transformation>
+        <StringsLiterallyEqual/>
+      </Transforms>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>TestXNG.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+
+</Tests>

@@ -1,0 +1,10 @@
+% Introduction to TestXNG
+%
+% Author: Filip van Laenen <f.a.vanlaenen@ieee.org>
+% Version: $Id: chpt_introduction.tex 10 2009-01-07 20:52:04Z filipvanlaenen $
+
+\chapter{Introduction to TestXNG}
+
+Although Test-Driven Development (TDD) has become the standard practice to develop software, there are not so many tools available to write unit or integration tests for XSL Transformations\seeurl{http://www.w3.org/TR/xslt}, and none for the development of XML Schemas\seeurl{http://www.w3.org/XML/Schema}. TestXNG is an effort to fill the gap, and in contrast to the few tools that are available for writing unit tests for XSL Transformations, it is not based on JUnit\seeurl{http://www.junit.org} but inspired by TestNG\seeurl{http://testng.org}. The grouping of tests was one key concept introduced by TestNG, and allows tests to be grouped together in logical units around features, the test level, the time required by the tests to run, or any other classification that makes sense in a project. Another key concept from TestNG is the notion of dependencies between tests: when a feature is broken, not only the specific test on that particular feature will fail, but all other tests depending on that feature will fail too. As a consequence, the test report may look worse than the situation really is, and may even make it harder to find the root cause because of the noise created by all the failing tests.
+
+TestXNG will be developed in Java, and for Java projects already using Maven\seeurl{http://maven.apache.org}, using TestXNG will be as simple as including the plug-in for TestXNG in the project's POM file and start writing tests. For other projects, a stand-alone application in Java will be available to run the tests. Plug-ins for IDEs like Eclipse\seeurl{http://www.eclipse.org} and IntelliJ\seeurl{http://www.jetbrains.com/idea} may be developed too in the future.

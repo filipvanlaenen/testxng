@@ -1,0 +1,42 @@
+<project 
+      xmlns="http://maven.apache.org/POM/4.0.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+      xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sourceforge.testxng</groupId>
+    <artifactId>root</artifactId>
+    <version>0.8</version>
+  </parent>
+  <groupId>net.sourceforge.testxng</groupId>
+  <artifactId>selftest</artifactId>
+  <packaging>jar</packaging>
+  <version>0.7.99.1-SNAPSHOT</version>
+  <name>TestXNG Selftest</name>
+  <description>
+    TestXNG tests on the TestXNG XML Schema
+  </description>
+  <dependencies>
+    <dependency>
+      <groupId>${pom.groupId}</groupId>
+      <artifactId>maven-testxng-plugin</artifactId>
+      <version>${pom.version}</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>net.sourceforge.testxng</groupId>
+        <artifactId>maven-testxng-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

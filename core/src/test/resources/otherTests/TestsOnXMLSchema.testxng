@@ -1,0 +1,26 @@
+<Tests>
+  <Test id="ValidatesCanHaveASchemaReference">
+    <SourceFile>FooBarWithoutSchemaReference.xml</SourceFile>
+    <Assert>
+      <Validates>
+        <Schema>FooBar.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+  <Test id="XmlCodeDirectlyInSourceElement">
+    <Source><Foo><Bar>Lorem ipsum</Bar></Foo></Source>
+    <Assert>
+      <Validates>
+        <Schema>FooBar.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+  <Test id="DoesNotValidateCanHaveASchemaReference">
+    <Source><Foo><Baz>Lorem ipsum</Baz></Foo></Source>
+    <Assert>
+      <DoesNotValidate>
+        <Schema>FooBar.xsd</Schema>
+      </DoesNotValidate>
+    </Assert>
+  </Test>
+</Tests>

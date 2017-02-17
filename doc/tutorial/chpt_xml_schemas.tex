@@ -1,0 +1,131 @@
+% Chapter about testing XML Schemas
+%
+% Author: Filip van Laenen <f.a.vanlaenen@ieee.org>
+% Version: $Id: chpt_xml_schemas.tex 15 2009-01-19 20:39:40Z filipvanlaenen $
+
+\chapter{Testing XML Schemas}
+
+\section{Basic Validation}
+
+The following example shows a basic test validating some XML source code against an XML schema:
+\begin{verbatim}
+<Tests>
+  ...
+  <Test id="FooBarValidates">
+    <Source>
+      <Foo>
+        <Bar>Lorem ipsum</Bar>
+      </Foo>
+    </Source>
+    <Assert>
+      <Validates>
+        <Schema>FooBar.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+  ...
+</Tests>
+\end{verbatim}
+
+It is also possible to validate the XML code in an external file against an XML schema, as shown in the following example:
+\begin{verbatim}
+<Tests>
+  ...
+  <Test id="ExternalFooBarValidates">
+    <SourceFile>FooBar.xml</SourceFile>
+    <Assert>
+      <Validates>
+        <Schema>FooBar.xsd</Schema>
+      </Validates>
+    </Assert>
+  </Test>
+  ...
+</Tests>
+\end{verbatim}
+
+Finally, if the external file already contains a reference to an XML schema, it is not necessary to specify the XML schema explicitly in a {\tt Schema} element, like in the following example:
+\begin{verbatim}
+<Tests>
+  ...
+  <Test id="ExternalFooBarValidatesAgainstItsOwnSchema">
+    <SourceFile>FooBar.xml</SourceFile>
+    <Assert>
+      <Validates/>
+    </Assert>
+  </Test>
+  ...
+</Tests>
+\end{verbatim}
+
+If an external file contains a reference to an XML schema, but the test definition contains a {\tt Schema} element referring to another XML schema, it is the XML Schema specified in the {\tt Schema} element that will be used in the test.
+
+\section{Non-Validation}
+
+It is also possible to let a test verify that a certain piece of XML source code does not validate against an XML schema. This may make sense e.g. when one wants to make sure that the XML schema ensures that two child elements are mutually exclusive. The following example shows how this can be done:
+\begin{verbatim}
+<Tests>
+  ...
+  <Test id="FooBazDoesNotValidate">
+    <Source>
+      <Foo>
+        <Baz>Lorem ipsum</Baz>
+      </Foo>
+    </Source>
+    <Assert>
+      <DoesNotValidate>
+        <Schema>FooBar.xsd</Schema>
+      </DoesNotValidate>
+    </Assert>
+  </Test>
+  ...
+</Tests>
+\end{verbatim}
+
+It is also possible to test the non-validation of XML source code in an external file, in the same way as for the validation case:
+\begin{verbatim}
+<Tests>
+  ...
+  <Test id="ExternalFooBazDoesNotValidate">
+    <SourceFile>FooBaz.xml</SourceFile>
+    <Assert>
+      <DoesNotValidate>
+        <Schema>FooBar.xsd</Schema>
+      </DoesNotValidate>
+    </Assert>
+  </Test>
+  ...
+</Tests>
+\end{verbatim}
+
+Notice that it doesn't make much sense to test for the non-validation of XML source code stored in an external file against the XML schema referred to in that external file, even though TestXNG does allow to write such a test.
+
+\section{Organizing XML Schemas for Testability}
+
+In order to be able to write tests using TestXNG, an XML schema has to be organized such that it is possible to connect to the various elements defined in the XML schemas. The easiest way to do this is to define all relevant elements explicitly as XML elements, and referring to complex types where necessary:
+\begin{verbatim}
+  <xsd:element name="Foo" type="FooType"/>
+
+  <xsd:element name="Bar" type="xsd:string"/>
+\end{verbatim}
+
+Complex types can then be defined in the following manner, referring to the elements where appropriate:
+\begin{verbatim}
+  <xsd:complexType name="FooType">
+    <xsd:sequence>
+      <xsd:element ref="Bar"/>
+      <xsd:element name="Qux" type="QuxType"/>  
+    </xsd:sequence>
+  </xsd:complexType>
+\end{verbatim}
+
+In order to be able to write tests for simple types that are restrictions or extensions, explicit elements have to be defined for them too such that they can be accessed from the TestXNG test definitions:  
+\begin{verbatim}
+  <xsd:element name="Qux" type="QuxType"/>
+
+  <xsd:simpleType name="TransformationType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value=".*qux.*"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+\end{verbatim}
+It is clear that tests on restictions often will involve both validation and non-validation.
